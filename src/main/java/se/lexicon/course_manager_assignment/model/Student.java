@@ -1,19 +1,23 @@
 package se.lexicon.course_manager_assignment.model;
 
-import se.lexicon.course_manager_assignment.data.sequencers.StudentSequencer;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Student implements Serializable {
-    private final int id;
+    private int id;
     private String name;
     private String email;
     private String address;
 
 
     public Student(String name, String email, String address) {
-        this.id = StudentSequencer.nextStudentId();
+        this.name = name;
+        this.email = email;
+        this.address = address;
+    }
+
+    public Student(int id, String name, String email, String address) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;
@@ -21,6 +25,10 @@ public class Student implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getName() {
