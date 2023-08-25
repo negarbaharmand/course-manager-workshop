@@ -19,8 +19,9 @@ public class StudentCollectionRepository implements StudentDao {
 
     @Override
     public Student createStudent(String name, String email, String address) {
-        Student newStudent = new Student(StudentSequencer.nextStudentId(),name, email, address);
-
+        // Solution #1 Student newStudent = new Student(StudentSequencer.nextStudentId(),name, email, address);
+        Student newStudent = new Student(name, email, address);
+        newStudent.setId(StudentSequencer.getStudentSequencer());
         students.add(newStudent);
         return newStudent;
     }
@@ -37,13 +38,13 @@ public class StudentCollectionRepository implements StudentDao {
 
     @Override
     public Collection<Student> findByNameContains(String name) {
-     List<Student> result = new ArrayList<>();
-     for (Student student : students) {
-         if (student.getName().contains(name)) {
-             result.add(student);
-         }
-     }
-     return result;
+        List<Student> result = new ArrayList<>();
+        for (Student student : students) {
+            if (student.getName().contains(name)) {
+                result.add(student);
+            }
+        }
+        return result;
     }
 
     @Override
@@ -53,7 +54,8 @@ public class StudentCollectionRepository implements StudentDao {
                 return student;
             }
         }
-        return null;    }
+        return null;
+    }
 
     @Override
     public Collection<Student> findAll() {
