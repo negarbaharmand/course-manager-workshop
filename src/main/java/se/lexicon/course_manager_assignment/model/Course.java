@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class Course implements Serializable {
-    private final int id;
+    private  int id;
     private String courseName;
     private LocalDate startDate;
     private int weekDuration;
@@ -17,15 +17,19 @@ public class Course implements Serializable {
 
 
     public Course(String courseName, LocalDate startDate, int weekDuration) {
-        this.id = CourseSequencer.getCourseSequencer();
         this.courseName = courseName;
         this.startDate = startDate;
         this.weekDuration = weekDuration;
         this.students =new ArrayList<>();
+        this.id = CourseSequencer.nextCourseId();
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCourseName() {
