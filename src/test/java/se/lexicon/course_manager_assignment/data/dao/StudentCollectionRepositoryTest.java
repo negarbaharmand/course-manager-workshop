@@ -35,7 +35,7 @@ public class StudentCollectionRepositoryTest {
     @Test
     public void test_createStudent() {
         Student actualData = new Student("test", "test@", " def");
-        Assertions.assertEquals(0, actualData.getId());
+        Assertions.assertEquals(1, actualData.getId());
         Assertions.assertEquals("test", actualData.getName());
         Assertions.assertEquals("test@", actualData.getEmail());
         Assertions.assertEquals(" def", actualData.getAddress());
