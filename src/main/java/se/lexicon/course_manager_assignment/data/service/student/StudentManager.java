@@ -28,9 +28,13 @@ public class StudentManager implements StudentService {
 
     @Override
     public StudentView create(CreateStudentForm form) {
-       /* Student student = new Student(form.getName(), form.getEmail(), form.getAddress());
-        return converters.studentToStudentView(student);*/
-        return null;
+        if (form == null) {
+            throw new IllegalArgumentException("The form cannot be null.");
+        }
+        Student createdStudent = studentDao.createStudent(form.getName(), form.getEmail(), form.getAddress());
+       //If we didn't have converters StudentView result = new StudentView(createdStudent.getId(), createdStudent.getName(), createdStudent.getEmail(), createdStudent.getAddress());
+        StudentView result = converters.studentToStudentView(createdStudent);
+        return result;
     }
 
     @Override
