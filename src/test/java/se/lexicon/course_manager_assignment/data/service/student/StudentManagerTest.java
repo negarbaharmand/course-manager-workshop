@@ -11,7 +11,6 @@ import se.lexicon.course_manager_assignment.data.dao.StudentDao;
 import se.lexicon.course_manager_assignment.data.sequencers.StudentSequencer;
 import se.lexicon.course_manager_assignment.data.service.converter.ModelToDto;
 
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = {StudentManager.class, CourseCollectionRepository.class, StudentCollectionRepository.class, ModelToDto.class})
