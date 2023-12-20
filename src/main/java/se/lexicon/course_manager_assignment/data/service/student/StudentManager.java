@@ -18,13 +18,11 @@ import java.util.List;
 public class StudentManager implements StudentService {
 
     private final StudentDao studentDao;
-    private final CourseDao courseDao;
     private final Converters converters;
 
     @Autowired
-    public StudentManager(StudentDao studentDao, CourseDao courseDao, Converters converters) {
+    public StudentManager(StudentDao studentDao, Converters converters) {
         this.studentDao = studentDao;
-        this.courseDao = courseDao;
         this.converters = converters;
     }
 
@@ -84,7 +82,7 @@ public class StudentManager implements StudentService {
     public List<StudentView> findAll() {
         Collection<Student> students = studentDao.findAll();
         List<StudentView> studentViews = new ArrayList<>();
-        for(Student student : students) {
+        for (Student student : students) {
             studentViews.add(converters.studentToStudentView(student));
         }
         return studentViews;

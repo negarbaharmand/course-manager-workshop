@@ -15,6 +15,12 @@ public class Course implements Serializable {
     private int weekDuration;
     private Collection<Student> students;
 
+    public Course() {
+    }
+
+    public Course(int id) {
+        this.id = id;
+    }
 
     public Course(String courseName, LocalDate startDate, int weekDuration) {
         this.courseName = courseName;

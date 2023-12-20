@@ -25,8 +25,8 @@ import java.util.stream.Collectors;
 
 @Controller
 public class CourseController {
-    private CourseService courseService;
-    private StudentService studentService;
+    private final CourseService courseService;
+    private final StudentService studentService;
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseController.class);
 
     @Autowired

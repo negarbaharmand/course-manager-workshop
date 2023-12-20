@@ -11,6 +11,12 @@ public class Student implements Serializable {
     private String email;
     private String address;
 
+    public Student() {
+    }
+
+    public Student(int id) {
+        this.id = id;
+    }
 
     public Student(String name, String email, String address) {
         this.name = name;
@@ -19,12 +25,7 @@ public class Student implements Serializable {
         this.id = StudentSequencer.nextStudentId();
     }
 
-   /* Solution #1 public Student(int id, String name, String email, String address) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.address = address;
-    }*/
+
 
     public int getId() {
         return id;
