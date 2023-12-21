@@ -8,6 +8,7 @@ import se.lexicon.course_manager_assignment.data.service.converter.Converters;
 import se.lexicon.course_manager_assignment.dto.forms.CreateStudentForm;
 import se.lexicon.course_manager_assignment.dto.forms.UpdateStudentForm;
 import se.lexicon.course_manager_assignment.dto.views.StudentView;
+import se.lexicon.course_manager_assignment.model.Course;
 import se.lexicon.course_manager_assignment.model.Student;
 
 import java.util.ArrayList;
@@ -18,10 +19,12 @@ import java.util.List;
 public class StudentManager implements StudentService {
 
     private final StudentDao studentDao;
+    private final CourseDao courseDao;
     private final Converters converters;
 
     @Autowired
-    public StudentManager(StudentDao studentDao, Converters converters) {
+    public StudentManager(StudentDao studentDao,CourseDao courseDao, Converters converters) {
+        this.courseDao = courseDao;
         this.studentDao = studentDao;
         this.converters = converters;
     }
@@ -49,9 +52,6 @@ public class StudentManager implements StudentService {
         toUpdateStudent.setName(form.getName());
         toUpdateStudent.setEmail(form.getEmail());
         toUpdateStudent.setAddress(form.getAddress());
-
-        studentDao.removeStudent(toUpdateStudent);
-        studentDao.createStudent(toUpdateStudent.getName(), toUpdateStudent.getEmail(), toUpdateStudent.getAddress()); // Create a new entry
 
         return converters.studentToStudentView(toUpdateStudent);
     }
@@ -91,9 +91,13 @@ public class StudentManager implements StudentService {
     @Override
     public boolean deleteStudent(int id) {
         Student student = studentDao.findById(id);
-        if (student != null) {
-            return studentDao.removeStudent(student);
+
+        for (Course course : courseDao.findAll()) {
+            if (course.getStudents().contains(student)) {
+                course.unrollStudent(student);
+            }
         }
-        return false;
+            return studentDao.removeStudent(student);
+
     }
 }
